@@ -2,16 +2,13 @@ plugins {
     id(Plugins.androidApplication)
     kotlin(KotlinPlugins.android)
     kotlin(KotlinPlugins.kapt)
-    id(Plugins.hilt)
     kotlin(KotlinPlugins.serialization) version Kotlin.version
+    id(Plugins.hilt)
 }
 
 dependencies {
     implementation(project(":shared"))
-    implementation(Accompanist.coil)
-
     implementation(AndroidX.appCompat)
-    implementation(AndroidX.fragmentKtx)
 
     implementation(Compose.runtime)
     implementation(Compose.runtimeLiveData)
@@ -31,8 +28,6 @@ dependencies {
     kapt(Hilt.hiltCompiler)
 
     implementation(Kotlinx.datetime)
-
-    implementation(Ktor.android)
 
     debugImplementation(SquareUp.leakCanary)
 }
@@ -60,8 +55,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        useIR = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Compose.composeVersion
+    }
+    kapt {
+        correctErrorTypes = true
     }
 }
