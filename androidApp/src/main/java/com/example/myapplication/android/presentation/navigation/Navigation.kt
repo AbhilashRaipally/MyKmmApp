@@ -15,6 +15,7 @@ import com.example.myapplication.android.presentation.recipe_detail.RecipeDetail
 import com.example.myapplication.android.presentation.recipe_list.RecipeListScreen
 import com.example.myapplication.android.presentation.recipe_list.RecipeListViewModel
 
+@ExperimentalStdlibApi
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
@@ -40,7 +41,7 @@ fun Navigation() {
             val viewModel: RecipeDetailViewModel =
                 viewModel(LocalViewModelStoreOwner.current!!, "RecipeDetailViewModel", factory)
             RecipeDetailScreen(
-                recipeId = viewModel.recipeId.value
+                recipe = viewModel.recipe.value
             )
         }
     }

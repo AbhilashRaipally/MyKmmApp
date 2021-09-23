@@ -33,16 +33,18 @@ kotlin {
         val commonMain by getting {
             dependencies{
                 implementation(Kotlinx.datetime)
+                implementation(Ktor.core)
+                implementation(Ktor.clientSerialization)
             }
         }
         val androidMain by getting{
             dependencies{
-
+                implementation(Ktor.android)
             }
         }
         val iosMain by getting{
             dependencies{
-                
+                implementation(Ktor.ios)
             }
         }
     }
