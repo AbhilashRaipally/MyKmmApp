@@ -4,6 +4,7 @@ import com.example.myapplication.datasource.cache.RecipeCache
 import com.example.myapplication.datasource.network.RecipeService
 import com.example.myapplication.domain.model.Recipe
 import com.example.myapplication.domain.util.DataState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -19,6 +20,8 @@ class SearchRecipes(
         try{
             //network call
             val recipes = recipeService.search(page,query)
+
+            delay(500)
 
             //DB insert
             recipeCache.insert(recipes)

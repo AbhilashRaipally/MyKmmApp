@@ -1,6 +1,8 @@
 package com.example.myapplication.android.presentation.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
@@ -15,6 +17,8 @@ import com.example.myapplication.android.presentation.recipe_detail.RecipeDetail
 import com.example.myapplication.android.presentation.recipe_list.RecipeListScreen
 import com.example.myapplication.android.presentation.recipe_list.RecipeListViewModel
 
+@ExperimentalComposeUiApi
+@ExperimentalMaterialApi
 @ExperimentalStdlibApi
 @Composable
 fun Navigation() {
@@ -26,7 +30,9 @@ fun Navigation() {
             val viewModel: RecipeListViewModel =
                 viewModel(LocalViewModelStoreOwner.current!!, "RecipeListViewModel", factory)
             RecipeListScreen(
-                onSelectRecipe = { recipeId ->
+                state = viewModel.state.value,
+                onTriggerEvent = viewModel::onTriggerEvent,
+                onClickRecipeItem = { recipeId ->
                     navController.navigate("${Screen.RecipeDetail.route}/$recipeId")
                 }
             )

@@ -5,30 +5,39 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.myapplication.android.presentation.components.GradientDemo
+import com.example.myapplication.android.presentation.recipe_list.components.RecipeCard
+import com.example.myapplication.android.presentation.recipe_list.components.RecipeList
+import com.example.myapplication.android.presentation.theme.AppTheme
+import com.example.myapplication.presentation.recipe_list.RecipeListEvents
+import com.example.myapplication.presentation.recipe_list.RecipeListState
 
+@ExperimentalMaterialApi
+@ExperimentalComposeUiApi
 @Composable
 fun RecipeListScreen(
-    onSelectRecipe: (Int) -> Unit,
+    state: RecipeListState,
+    onTriggerEvent: (RecipeListEvents)->Unit,
+    onClickRecipeItem: (Int) -> Unit,
 ) {
-    LazyColumn {
-        items(100) { recipeId ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        onSelectRecipe(recipeId)
-                    }
-            ) {
-                Text(
-                    modifier = Modifier
-                        .padding(16.dp),
-                    text = "RecipeId = ${recipeId}"
-                )
-            }
-        }
+    AppTheme(displayProgressBar = state.isLoading) {
+        RecipeList(
+            loading = state.isLoading,
+            recipes = state.recipes,
+            page = state.page,
+            onTriggerNextPage = {
+                onTriggerEvent(RecipeListEvents.NextPage)
+            },
+            onClickRecipeListItem = onClickRecipeItem
+        )
+
     }
+
 }
