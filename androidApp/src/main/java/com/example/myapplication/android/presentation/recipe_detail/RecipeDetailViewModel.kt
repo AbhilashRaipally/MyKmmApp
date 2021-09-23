@@ -35,7 +35,7 @@ class RecipeDetailViewModel @Inject constructor(
             println("RecipeListVm: ${dataState.isLoading}")
 
             dataState.data?.let {recipe ->
-                println("RecipeDetailsVm: ${recipe}")
+                println("RecipeDetailsVm: $recipe")
                 this.recipe.value = recipe
             }
 

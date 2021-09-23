@@ -22,16 +22,16 @@ class RecipeListViewModel @Inject constructor(
     private fun loadRecipes() {
         searchRecipes.execute(
             page = 1,
-            query = "vegan"
+            query = "chicken"
         ).onEach {dataState ->
             println("RecipeListVm: ${dataState.isLoading}")
 
-            dataState.data?.let {recipies ->
-                println("RecipeListVm: ${recipies}")
+            dataState.data?.let {recipes ->
+                println("RecipeListVm: $recipes")
             }
 
             dataState.message?.let {message ->
-                println("RecipeListVm: ${message}")
+                println("RecipeListVm: $message")
             }
         }.launchIn(viewModelScope)
     }
