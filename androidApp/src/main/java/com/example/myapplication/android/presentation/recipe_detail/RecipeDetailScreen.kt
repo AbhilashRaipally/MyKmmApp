@@ -14,7 +14,7 @@ fun RecipeDetailScreen(
     }
     else{
         Column{
-            Text("RecipeDetailScreen: ${recipe.title}")
+            Text(recipe.title)
         }
     }
 }
