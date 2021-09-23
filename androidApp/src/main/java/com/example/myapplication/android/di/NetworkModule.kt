@@ -23,7 +23,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRecipeService(httpClient: HttpClient):RecipeService{
+    fun provideRecipeService(httpClient: HttpClient): RecipeService {
         return RecipeServiceImpl(httpClient,BASE_URL )
     }
 }
