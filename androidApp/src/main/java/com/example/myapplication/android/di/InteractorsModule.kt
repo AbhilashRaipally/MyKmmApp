@@ -1,5 +1,6 @@
 package com.example.myapplication.android.di
 
+import com.example.myapplication.datasource.cache.RecipeCache
 import com.example.myapplication.datasource.network.RecipeService
 import com.example.myapplication.interactors.recipe_detail.GetRecipe
 import com.example.myapplication.interactors.recipe_list.SearchRecipes
@@ -15,16 +16,17 @@ object InteractorsModule {
     @Singleton
     @Provides
     fun provideSearchRecipes(
-        recipeService: RecipeService
-    ):SearchRecipes{
-        return SearchRecipes(recipeService = recipeService)
+        recipeService: RecipeService,
+        recipeCache: RecipeCache
+    ): SearchRecipes {
+        return SearchRecipes(recipeService = recipeService, recipeCache = recipeCache)
     }
 
     @Singleton
     @Provides
     fun providesGetRecipe(
-        recipeService: RecipeService
-    ):GetRecipe{
-        return GetRecipe(recipeService = recipeService)
+        recipeCache: RecipeCache
+    ): GetRecipe {
+        return GetRecipe(recipeCache = recipeCache)
     }
 }
