@@ -29,6 +29,8 @@ dependencies {
 
     implementation(Kotlinx.datetime)
 
+    implementation(Ktor.android)
+
     debugImplementation(SquareUp.leakCanary)
 }
 
