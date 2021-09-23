@@ -8,5 +8,12 @@ data class RecipeListState(
     val query: String = "",
     val recipes: List<Recipe> = listOf()
 ) {
+    //Create a constructor filling default vals to allow Swift use this class
+    constructor() : this(
+        isLoading = false,
+        page = 1,
+        query = "",
+        recipes = listOf()
+    )
 
 }
