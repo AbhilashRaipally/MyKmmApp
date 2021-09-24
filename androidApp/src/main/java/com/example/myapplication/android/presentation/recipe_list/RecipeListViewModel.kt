@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.domain.model.Recipe
 import com.example.myapplication.interactors.recipe_list.SearchRecipes
+import com.example.myapplication.presentation.recipe_list.FoodCategory
 import com.example.myapplication.presentation.recipe_list.RecipeListEvents
 import com.example.myapplication.presentation.recipe_list.RecipeListState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,6 +35,15 @@ class RecipeListViewModel @Inject constructor(
             }
             RecipeListEvents.NextPage -> {
                 nextPage()
+            }
+            RecipeListEvents.NewSearch -> {
+                newSearch()
+            }
+            is RecipeListEvents.OnUpdateQuery  -> {
+                state.value = state.value.copy(query = event.query, selectedCategory = null)
+            }
+            is RecipeListEvents.OnSelectCategory  -> {
+                onSelectCategory(event.category)
             }
             else ->{
                 handleError("Invalid Event")
@@ -69,6 +79,16 @@ class RecipeListViewModel @Inject constructor(
     private fun nextPage(){
         state.value = state.value.copy(page = state.value.page +1)
         loadRecipes()
+    }
+
+    private fun newSearch(){
+        state.value = state.value.copy(page = 1, recipes = listOf())
+        loadRecipes()
+    }
+
+    private fun onSelectCategory(category: FoodCategory){
+        state.value = state.value.copy(selectedCategory =  category, query = category.value)
+        newSearch()
     }
 
     private fun handleError(errorMessage:String){

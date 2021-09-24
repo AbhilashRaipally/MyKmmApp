@@ -6,6 +6,7 @@ data class RecipeListState(
     val isLoading: Boolean = false,
     val page: Int = 1,
     val query: String = "",
+    val selectedCategory: FoodCategory? = null,
     val recipes: List<Recipe> = listOf()
 ) {
     //Create a constructor filling default vals to allow Swift use this class
@@ -13,6 +14,7 @@ data class RecipeListState(
         isLoading = false,
         page = 1,
         query = "",
+        selectedCategory = null,
         recipes = listOf()
     )
 
