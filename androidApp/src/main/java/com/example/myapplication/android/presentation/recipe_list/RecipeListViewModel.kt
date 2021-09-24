@@ -56,7 +56,6 @@ class RecipeListViewModel @Inject constructor(
             page = state.value.page,
             query = state.value.query
         ).onEach { dataState ->
-            println("RecipeListVm: ${dataState.isLoading}")
             state.value = state.value.copy(isLoading = dataState.isLoading)
 
             dataState.data?.let { recipes ->
@@ -64,7 +63,7 @@ class RecipeListViewModel @Inject constructor(
             }
 
             dataState.message?.let { message ->
-                println("RecipeListVm: $message")
+                handleError(message)
             }
         }.launchIn(viewModelScope)
     }
